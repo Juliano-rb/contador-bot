@@ -5,6 +5,7 @@ const TelegramBot = require('node-telegram-bot-api');
 module.exports = function(){
     const token = process.env.BOT_TOKEN
 
+    console.log(`Starting with polling mode ${eval(process.env.DEV)}`)
     const bot = new TelegramBot(token, {
         polling : eval(process.env.DEV)
     });
@@ -16,4 +17,6 @@ module.exports = function(){
         // send a message to the chat acknowledging receipt of their message
         bot.sendMessage(chatId, 'Received your message');
     });
+
+    console.log("Bot started.")
 }
