@@ -6,5 +6,8 @@
   "repository": "https://github.com/Juliano-rb/contador-bot",
   "author": "Juliano-rb",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "scripts": {
+    "start": "node index.js"
+  }
 }
