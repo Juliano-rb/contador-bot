@@ -1,0 +1,10 @@
+{
+  "name": "contador-bot",
+  "version": "0.1",
+  "description": "Organizador de débitos para pessoas que dividem residência",
+  "main": "index.js",
+  "repository": "https://github.com/Juliano-rb/contador-bot",
+  "author": "Juliano-rb",
+  "license": "MIT",
+  "private": true
+}
