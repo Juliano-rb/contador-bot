@@ -10,6 +10,10 @@ module.exports = function(){
         polling : eval(process.env.DEV)
     });
 
+    bot.setWebHook(process.env.APP_URL)
+
+    bot.openWebHook()
+
 
     bot.on('message', (msg) => {
         const chatId = msg.chat.id;
