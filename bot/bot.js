@@ -10,7 +10,7 @@ module.exports = function(){
         polling : eval(process.env.DEV)
     });
 
-    bot.setWebHook(process.env.APP_URL)
+    bot.setWebHook(`${process.env.APP_URL}/bot${process.env.BOT_TOKEN}`)
 
     bot.openWebHook()
 
