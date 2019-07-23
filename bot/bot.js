@@ -18,6 +18,7 @@ expressApp.use(bot.webhookCallback(`/bot${BOT_TOKEN}`));
 /*
  your bot commands and all the other stuff on here ....
 */
+bot.hears('hi', (ctx) => ctx.reply('Hey there'))
 // and at the end just start server on PORT
 expressApp.get('/', (req, res) => {
   res.send('Hello World!');
