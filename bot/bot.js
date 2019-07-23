@@ -1,26 +1,27 @@
 const path = require('path')
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
-const TelegramBot = require('node-telegram-bot-api');
+const Telegraf = require('telegraf');
+const express = require('express');
+const expressApp = express();
 
-module.exports = function(){
-    const token = process.env.BOT_TOKEN
+const BOT_TOKEN = process.env.BOT_TOKEN;
+const PORT = process.env.PORT || 3000;
+const APP_URL = process.env.APP_URL;
 
-    console.log(`Starting with polling mode ${eval(process.env.DEV)}`)
-    const bot = new TelegramBot(token, {
-        polling : eval(process.env.DEV)
-    });
+console.log('token' + BOT_TOKEN);
+console.log('porta:' + PORT);
+console.log('url:' + APP_URL);
 
-    bot.setWebHook(`${process.env.APP_URL}/bot${process.env.BOT_TOKEN}`)
-
-    bot.openWebHook()
-
-
-    bot.on('message', (msg) => {
-        const chatId = msg.chat.id;
-      
-        // send a message to the chat acknowledging receipt of their message
-        bot.sendMessage(chatId, 'Received your message');
-    });
-
-    console.log("Bot started.")
-}
+const bot = new Telegraf(BOT_TOKEN);
+bot.telegram.setWebhook(`${APP_URL}/bot${BOT_TOKEN}`);
+expressApp.use(bot.webhookCallback(`/bot${BOT_TOKEN}`));
+/*
+ your bot commands and all the other stuff on here ....
+*/
+// and at the end just start server on PORT
+expressApp.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+expressApp.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
