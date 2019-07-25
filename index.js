@@ -1,12 +1,25 @@
-const http = require('http')
-const bot = require('./bot/bot')
-bot()
-const port = (process.env.PORT || 5000)
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '.env') })
+const Telegraf = require('telegraf')
+const express = require('express')
+const expressApp = express()
 
-const server = http.createServer((req, res)=>{
-    res.writeHead(200, {'Content-Type':'application/json'})
-    res.write(JSON.stringify({name:'contador-bot', ver: '0.0.1'}))
-    res.end();
+const BOT_TOKEN = process.env.BOT_TOKEN
+const PORT = process.env.PORT || 3000
+const APP_URL = process.env.APP_URL
+
+const bot = new Telegraf(BOT_TOKEN)
+expressApp.use(bot.webhookCallback(`/${BOT_TOKEN}`))
+bot.telegram.setWebhook(`${APP_URL}`)
+
+expressApp.get('/', (req, res) => {
+    res.send('Hello World!')
 })
 
-server.listen(port);
+expressApp.on('bolsonaro', (req, res) => {
+    res.send('facista')
+})
+
+expressApp.listen(PORT, () => {
+  console.log('Server is listening')
+})
