@@ -17,17 +17,41 @@ expressApp.use(bot.webhookCallback(`/${BOT_TOKEN}`))
 
 bot.on('text', (ctx, next) => {
     bot.telegram.sendMessage(OWNER_CHAT_ID, 
-      'new message: ' + `from-id:${ctx.from.id}\n from-id:${ctx.from.username} text:${ctx.message.text}`
+      "*New Message:*\n*chat-id*: "+
+      ctx.from.id+"\n"+
+      "*username*: "+ctx.from.username+"\n"+
+      "*text*: "+ctx.message.text,
+      {parse_mode:'Markdown'}
     )
-
+    //console.log(ctx.message.entities)
     return next(ctx)
 })
+
+if(eval(process.env.DEV)){
+  bot.launch()
+}
 
 bot.start((ctx) => ctx.reply('Welcome!'))
 bot.help((ctx) => ctx.reply('Send me a sticker'))
 bot.on('sticker', (ctx) => ctx.reply('👍'))
 
+bot.help((ctx) => ctx.reply('Send me a sticker'))
+
 bot.hears('hi', (ctx) => ctx.reply('Hey there'))
+
+bot.command('send', (ctx) => {
+  let message = ctx.message.text
+  let params = ctx.message.text.split(" ");
+  console.log(params);
+
+  bot.telegram.sendMessage(params[1], 
+    params[2],
+    {parse_mode:'Markdown'}
+  )
+
+  ctx.reply("Oi, vc mandou o comando send na mensagem " + ctx.message.text)
+})
+
 
 expressApp.get('/', (req, res) => {
   res.send('Hello World!')
