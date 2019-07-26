@@ -8,14 +8,15 @@ const BOT_TOKEN = process.env.BOT_TOKEN
 const PORT = process.env.PORT || 3000
 const APP_URL = process.env.APP_URL
 
+const OWNER_CHAT_ID = '89797745'
+
 const bot = new Telegraf(BOT_TOKEN)
 
 bot.telegram.setWebhook(`${APP_URL}/${BOT_TOKEN}`)
 expressApp.use(bot.webhookCallback(`/${BOT_TOKEN}`))
 
 bot.on('text', ctx => {
-    //database.saveUserChat()
-    bot.telegram.sendMessage('89797745', 'new user: ' + `from-id:${ctx.from.id} text:${ctx.message.text}`)
+    bot.telegram.sendMessage(OWNER_CHAT_ID, 'new message: ' + `from-id:${ctx.from.username} text:${ctx.message.text}`)
 })
 bot.start((ctx) => ctx.reply('Welcome!'))
 bot.help((ctx) => ctx.reply('Send me a sticker'))
