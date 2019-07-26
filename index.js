@@ -12,12 +12,16 @@ const bot = new Telegraf(BOT_TOKEN)
 expressApp.use(bot.webhookCallback(`/${BOT_TOKEN}`))
 bot.telegram.setWebhook(`${APP_URL}`)
 
+bot.start((ctx) => ctx.reply('Welcome!'))
+bot.help((ctx) => ctx.reply('Send me a sticker'))
+bot.on('sticker', (ctx) => ctx.reply('👍'))
+bot.hears('hi', (ctx) => ctx.reply('Hey there'))
+bot.hears('bolsonaro', (ctx) => 
+    ctx.reply('https://api.telegram.org/bot{my_bot_token}/setWebhook?url={url_to_send_updates_to}')
+)
+
 expressApp.get('/', (req, res) => {
     res.send('Hello World!')
-})
-
-expressApp.on('bolsonaro', (req, res) => {
-    res.send('facista')
 })
 
 expressApp.listen(PORT, () => {
