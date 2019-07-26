@@ -15,11 +15,14 @@ const bot = new Telegraf(BOT_TOKEN)
 bot.telegram.setWebhook(`${APP_URL}/${BOT_TOKEN}`)
 expressApp.use(bot.webhookCallback(`/${BOT_TOKEN}`))
 
-bot.on('text', ctx => {
-    bot.telegram.sendMessage(OWNER_CHAT_ID, 'new message: ' + `from-id:${ctx.from.username} text:${ctx.message.text}`)
+bot.on('text', (ctx, next) => {
+    bot.telegram.sendMessage(OWNER_CHAT_ID, 
+      'new message: ' + `from-id:${ctx.from.id}\n from-id:${ctx.from.username} text:${ctx.message.text}`
+    )
 
     return next(ctx)
 })
+
 bot.start((ctx) => ctx.reply('Welcome!'))
 bot.help((ctx) => ctx.reply('Send me a sticker'))
 bot.on('sticker', (ctx) => ctx.reply('👍'))
