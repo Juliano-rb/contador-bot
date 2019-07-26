@@ -15,7 +15,7 @@ expressApp.use(bot.webhookCallback(`/${BOT_TOKEN}`))
 
 bot.on('text', ctx => {
     //database.saveUserChat()
-    ctx.sendMessage('89797745', 'new user: ' + `from-id:${ctx.from.id} chat-id:${ctx.chat.id}`)
+    bot.telegram.sendMessage('89797745', 'new user: ' + `from-id:${ctx.from.id} chat-id:${ctx.chat.id}`)
 })
 bot.start((ctx) => ctx.reply('Welcome!'))
 bot.help((ctx) => ctx.reply('Send me a sticker'))
