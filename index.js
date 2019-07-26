@@ -24,7 +24,7 @@ bot.on('sticker', (ctx) => ctx.reply('👍'))
 
 bot.hears('hi', (ctx) => ctx.reply('Hey there'))
 bot.hears('bolsonaro', (ctx) => 
-    ctx.reply('Facista')
+    ctx.reply('Fascista')
 )
 
 expressApp.get('/', (req, res) => {
