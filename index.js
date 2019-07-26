@@ -13,9 +13,9 @@ const bot = new Telegraf(BOT_TOKEN)
 bot.telegram.setWebhook(`${APP_URL}/${BOT_TOKEN}`)
 expressApp.use(bot.webhookCallback(`/${BOT_TOKEN}`))
 
-bot.on('text', ctx => {
-    //database.saveUserChat()
+bot.on('text', (ctx, next) => {
     bot.telegram.sendMessage('89797745', 'new user: ' + `from-id:${ctx.from.id} text:${ctx.message.text}`)
+    return next(ctx)
 })
 bot.start((ctx) => ctx.reply('Welcome!'))
 bot.help((ctx) => ctx.reply('Send me a sticker'))
