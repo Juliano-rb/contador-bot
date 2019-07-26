@@ -17,6 +17,8 @@ expressApp.use(bot.webhookCallback(`/${BOT_TOKEN}`))
 
 bot.on('text', ctx => {
     bot.telegram.sendMessage(OWNER_CHAT_ID, 'new message: ' + `from-id:${ctx.from.username} text:${ctx.message.text}`)
+
+    return next(ctx)
 })
 bot.start((ctx) => ctx.reply('Welcome!'))
 bot.help((ctx) => ctx.reply('Send me a sticker'))
