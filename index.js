@@ -52,7 +52,7 @@ bot.command('send', (ctx) => {
   let message = input.substring(input.search(' ')+1)
 
   //let params = ctx.message.text.split(" ");
-  console.log(`send message to chat_id:${chat_id}, content:${message}`);
+  console.log(`/send to chat_id:${chat_id}, content:${message}`);
 
   bot.telegram.sendMessage(chat_id, 
     message,
