@@ -12,15 +12,19 @@ const OWNER_CHAT_ID = '89797745'
 
 const bot = new Telegraf(BOT_TOKEN)
 
-bot.telegram.setWebhook(`${APP_URL}/${BOT_TOKEN}`)
-expressApp.use(bot.webhookCallback(`/${BOT_TOKEN}`))
+if(! eval(process.env.DEV)){
+  console.log("Setting Webhook")
+
+  bot.telegram.setWebhook(`${APP_URL}/${BOT_TOKEN}`)
+  expressApp.use(bot.webhookCallback(`/${BOT_TOKEN}`))
+}
 
 bot.on('text', (ctx, next) => {
     bot.telegram.sendMessage(OWNER_CHAT_ID, 
       "*New Message:*\n*chat-id*: "+
       ctx.from.id+"\n"+
       "*username*: "+ctx.from.username+"\n"+
-      "*text*: "+ctx.message.text,
+      "*text*: _"+ctx.message.text+"_",
       {parse_mode:'Markdown'}
     )
     //console.log(ctx.message.entities)
@@ -28,6 +32,7 @@ bot.on('text', (ctx, next) => {
 })
 
 if(eval(process.env.DEV)){
+  console.log("Starting in DEV mode")
   bot.launch()
 }
 
@@ -40,18 +45,24 @@ bot.help((ctx) => ctx.reply('Send me a sticker'))
 bot.hears('hi', (ctx) => ctx.reply('Hey there'))
 
 bot.command('send', (ctx) => {
-  let message = ctx.message.text
-  let params = ctx.message.text.split(" ");
-  console.log(params);
+  let input = ctx.message.text
+  input = input.substring(input.search(' ')+1)
 
-  bot.telegram.sendMessage(params[1], 
-    params[2],
+  let chat_id = input.substring(0,input.search(' '))
+  let message = input.substring(input.search(' ')+1)
+
+  //let params = ctx.message.text.split(" ");
+  console.log(`send message to chat_id:${chat_id}, content:${message}`);
+
+  bot.telegram.sendMessage(chat_id, 
+    message,
     {parse_mode:'Markdown'}
   )
 
-  ctx.reply("Oi, vc mandou o comando send na mensagem " + ctx.message.text)
+  ctx.reply("*Você mandou a mensagem: * " + message + "\n*Para*: " + chat_id,
+  {parse_mode:'Markdown'}
+  )
 })
-
 
 expressApp.get('/', (req, res) => {
   res.send('Hello World!')
