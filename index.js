@@ -1,36 +1,27 @@
 const path = require('path')
 require('dotenv').config({ path: path.resolve(__dirname, '.env') })
-const Telegraf = require('telegraf')
-const routes = require('./routes')
 const express = require('express')
 const expressApp = express()
+const bot = require('./bot')
 
-const BOT_TOKEN = process.env.BOT_TOKEN
 const PORT = process.env.PORT || 3000
 const APP_URL = process.env.APP_URL
+const DEV = eval(process.env.DEV)
 
-const OWNER_CHAT_ID = '89797745'
 
-const bot = new Telegraf(BOT_TOKEN)
+if( !DEV ){
+  console.log("Setting Webhook...")
 
-if(! eval(process.env.DEV)){
-  console.log("Setting Webhook")
-
-  bot.telegram.setWebhook(`${APP_URL}/${BOT_TOKEN}`)
-  expressApp.use(bot.webhookCallback(`/${BOT_TOKEN}`))
-}
-
-routes(bot)
-
-if(eval(process.env.DEV)){
-  console.log("Starting in DEV mode")
-  bot.launch()
+  const TOKEN = bot.telegram.token
+  bot.telegram.setWebhook(`${APP_URL}/${TOKEN}`)
+  expressApp.use(bot.webhookCallback(`/${TOKEN}`))
 }
 
 expressApp.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('There\'s nothing here :)')
 })
 
 expressApp.listen(PORT, () => {
   console.log('Server is listening')
 })
+
