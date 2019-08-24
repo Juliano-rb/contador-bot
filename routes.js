@@ -8,7 +8,7 @@ module.exports = (bot)=> {
     bot.use(commandArgs())
     bot.use(logger())
 
-    Main(bot)
+    helloArea(bot)
     ProtectedArea(bot)
 
    
