@@ -10,6 +10,9 @@ const commandArgs = () => (ctx, next) => {
           command = match[1]
         }
         if (match[2]) {
+          complement = match[2]
+        }
+        if (match[2]) {
           args = match[2].split(' ')
         }
       }
@@ -17,8 +20,11 @@ const commandArgs = () => (ctx, next) => {
       ctx.state.command = {
         raw: text,
         command,
+        complement,
         args
       }
+
+      console.log(ctx.state.command)
     }
   }
   
