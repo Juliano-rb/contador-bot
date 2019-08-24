@@ -1,4 +1,4 @@
-const Main = require('./controllers/main')
+const helloArea = require('./controllers/helloArea')
 const ProtectedArea = require('./controllers/protectedArea')
 const logger = require('./middlewares/logger')
 const commandArgs = require('./middlewares/commandArgs')
