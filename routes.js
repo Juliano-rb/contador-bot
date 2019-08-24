@@ -6,8 +6,6 @@ module.exports = (bot)=> {
     // by lars graubner, exposes the parameters of the message
     bot.use(commandArgs())
 
-    bot.hears('hi', (ctx) => ctx.reply('Hey there'))
-
     Main(bot)
     ProtectedArea(bot)
 
