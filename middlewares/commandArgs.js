@@ -1,3 +1,4 @@
+//by https://larsgraubner.com/, exposes the parameters of the message
 const commandArgs = () => (ctx, next) => {
   if (ctx.updateType === 'message') {
     const text = ctx.update.message.text.toLowerCase()
