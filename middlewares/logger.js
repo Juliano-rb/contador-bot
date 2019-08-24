@@ -8,7 +8,7 @@ const logger = () => (ctx, next) => {
     SendMessage(ctx.tg, OWNER_CHAT_ID,
         "*New Message:*\n*chat-id*: "+
         ctx.from.id+"\n"+
-        "*username*: "+ctx.from.username+"\n"+
+        "*username*: @"+ctx.from.username+"\n"+
         "*text*: _"+ctx.message.text+"_"
     )
     
