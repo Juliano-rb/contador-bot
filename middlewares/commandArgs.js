@@ -1,6 +1,6 @@
 //by https://larsgraubner.com/, exposes the parameters of the message
 const commandArgs = () => (ctx, next) => {
-  if (ctx.updateType === 'message') {
+  if (ctx.updateType === 'message' && ctx.update.message.text) {
     const text = ctx.update.message.text.toLowerCase()
     if (text.startsWith('/')) {
       const match = text.match(/^\/([^\s]+)\s?(.+)?/)
