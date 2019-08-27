@@ -1,0 +1,47 @@
+{
+  "terminal.integrated.shell.osx": "/bin/zsh",
+  // Define o tema do VSCode
+  // Configura tamanho e família da fonte
+  "editor.fontSize": 16,
+  "editor.lineHeight": 24,
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  // "prettier.eslintIntegration": true,
+  "eslint.autoFixOnSave": true,
+  "tslint.autoFixOnSave": true,
+  "terminal.integrated.rendererType": "dom",
+  "eslint.validate": [
+    {
+      "language": "javascript",
+      "autoFix": true
+    },
+    {
+      "language": "javascriptreact",
+      "autoFix": true
+    },
+    {
+      "language": "typescript",
+      "autoFix": true
+    },
+    {
+      "language": "typescriptreact",
+      "autoFix": true
+    }
+  ],
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "breadcrumbs.enabled": true,
+  "editor.parameterHints.enabled": false,
+  // Aplica linhas verticais para lembrar de quebrar linha em códigos muito grandes
+  "editor.rulers": [
+    80,
+    120
+  ],
+  // Aplica um sinal visual na esquerda da linha selecionada
+  "editor.renderLineHighlight": "gutter",
+  // Aumenta a fonte do terminal
+  "terminal.integrated.fontSize": 14,
+  // Define o tema dos ícones na sidebar
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.colorTheme": "One Dark Pro"
+}

@@ -12,11 +12,18 @@
     "dev": "nodemon index.js"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "eslint": "^6.2.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "nodemon": "^1.19.1",
+    "sucrase": "^3.10.1"
   },
   "dependencies": {
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "prettier": "^1.18.2",
     "telegraf": "^3.30.1"
   }
 }
