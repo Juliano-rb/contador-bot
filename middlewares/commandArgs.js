@@ -5,7 +5,9 @@ const commandArgs = () => (ctx, next) => {
     if (text.startsWith('/')) {
       const match = text.match(/^\/([^\s]+)\s?(.+)?/)
       let args = []
-      let command
+      let command = null
+      let complement = null
+      
       if (match !== null) {
         if (match[1]) {
           command = match[1]
