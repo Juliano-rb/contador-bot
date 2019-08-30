@@ -1,3 +1,4 @@
+/* eslint-disable no-eval */
 const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, ".env") });
 const express = require("express");
@@ -10,17 +11,17 @@ const { APP_URL } = process.env;
 const DEV = eval(process.env.DEV);
 
 if (!DEV) {
-  console.log("Setting Webhook...");
+    console.log("Setting Webhook...");
 
-  const TOKEN = bot.telegram.token;
-  bot.telegram.setWebhook(`${APP_URL}/${TOKEN}`);
-  expressApp.use(bot.webhookCallback(`/${TOKEN}`));
+    const TOKEN = bot.telegram.token;
+    bot.telegram.setWebhook(`${APP_URL}/${TOKEN}`);
+    expressApp.use(bot.webhookCallback(`/${TOKEN}`));
 }
 
 expressApp.get("/", (req, res) => {
-  res.send("There's nothing here :)");
+    res.send("There's nothing here :)");
 });
 
 expressApp.listen(PORT, () => {
-  console.log("Server is listening");
+    console.log("Server is listening");
 });
