@@ -1,17 +1,14 @@
 /* eslint-disable no-eval */
 const path = require("path");
-require("dotenv").config({ path: path.resolve(__dirname, ".env") });
+require("dotenv").config({ path: path.resolve(__dirname, "..", ".env") });
 const Telegraf = require("telegraf");
 const Stage = require("./Stage");
-const logger = require("./middlewares/logger");
-const commandArgs = require("./middlewares/commandArgs");
+const Middlewares = require("./middlewares");
 
-const BOT_TOKEN = process.env.BOT_TOKEN;
+const { BOT_TOKEN } = process.env;
 const bot = new Telegraf(BOT_TOKEN);
 
-bot.use(logger());
-bot.use(commandArgs());
-
+Middlewares.Load(bot);
 Stage(bot);
 
 if (eval(process.env.DEV)) {
