@@ -5,7 +5,7 @@ const addItem = new TelegrafInlineMenu("new item");
 
 main.setCommand("go");
 
-main.submenu("Novo item", "itemrs", addItem);
+main.submenu("Novo item", "item", addItem);
 
 addItem.simpleButton("Adiciona!", "a", {
     doFunc: ctx => ctx.reply("Maiss!")
