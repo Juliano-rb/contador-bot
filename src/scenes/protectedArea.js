@@ -1,9 +1,13 @@
 const Scene = require("telegraf/scenes/base");
+const Extra = require("telegraf/extra");
+const Markup = require("telegraf/markup");
 const SendMessage = require("../controllers/SendMessage");
 
 const protectedArea = new Scene("protectedArea");
 
-protectedArea.enter(ctx => ctx.reply("Portas se abriram..."));
+protectedArea.enter(ctx =>
+    ctx.reply("Portas se abriram...", protectedArea.menu)
+);
 
 protectedArea.command("send", ctx => {
     const { text } = ctx.message;
@@ -30,5 +34,12 @@ protectedArea.command("send", ctx => {
         });
     }
 });
+
+protectedArea.command("/Inicio", ctx => ctx.scene.enter("helloArea"));
+
+protectedArea.menu = Markup.keyboard(["/Inicio"])
+    .oneTime()
+    .resize()
+    .extra();
 
 module.exports = protectedArea;
