@@ -8,13 +8,13 @@ const Middlewares = require("./middlewares");
 const { BOT_TOKEN } = process.env;
 const bot = new Telegraf(BOT_TOKEN);
 
-bot.use(Telegraf.log());
-
 Middlewares.Load(bot);
 Stage(bot);
 
 if (eval(process.env.DEV)) {
     console.log("Starting in DEV mode");
+
+    bot.use(Telegraf.log());
 
     bot.launch();
 }
