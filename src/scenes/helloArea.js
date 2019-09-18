@@ -11,9 +11,9 @@ helloArea.command("start", ctx => ctx.reply("Bem vindo", helloArea.menu));
 helloArea.hears("📢 Admin", ctx => ctx.scene.enter("protectedArea"));
 helloArea.command("Compra", ctx => ctx.scene.enter("newPurchase"));
 
-helloArea.help(ctx => ctx.reply("Send me a sticker"));
-helloArea.on("sticker", ctx => ctx.reply("Gostei"));
-helloArea.on("message", ctx => ctx.reply("E aê meu chapa"));
+helloArea.on("message", ctx =>
+    ctx.reply("Olá, humano. Escolha uma das opções do menu.", helloArea.menu)
+);
 
 helloArea.menu = Markup.keyboard([
     ["/Compra"],
